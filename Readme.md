@@ -51,9 +51,14 @@ This project monitors the health of HTTP endpoints as defined in a YAML configur
 
 ### Option 2: Run With Docker (Default Sample Configuration)
 
+First, ensure you’re in the project directory (where the `Dockerfile` is located), and run the following command to build the Docker image:
+```bash
+docker build -t health .
+```
 The Docker image includes a `sample.yml` file, which is used by default. To run the container with the included configuration:
 ```bash
-docker run --rm health-checker
+docker run --rm -it health
+
 ```
 
 This will use the `sample.yml` file that is bundled with the Docker image during the build process.
@@ -64,7 +69,7 @@ This will use the `sample.yml` file that is bundled with the Docker image during
 
 If you want to use a custom YAML configuration file, you can mount it at runtime:
 ```bash
-docker run --rm -v $(pwd)/sample.yaml:/app/sample.yaml health
+docker run --rm -it -v $(pwd)/sample.yml:/app/sample.yml health
 ```
 
 Replace `sample.yaml` with the path to your custom file.
@@ -113,6 +118,10 @@ The configuration for building the Docker image.
 
 ## Example Output
 ```plaintext
+Starting health checks. Press Ctrl+C to stop.
+Checked fetch index page: UP (Latency: 117.15316772460938 ms)
+Checked fetch careers page: UP (Latency: 54.9468994140625 ms)
+Checked fetch some fake post endpoint: DOWN (Latency: 39.63303565979004 ms)
+Checked fetch rewards index page: UP (Latency: 267.54307746887207 ms)
 fetch.com has 67% availability percentage
-www.fetchrewards.com has 50% availability percentage
 ```

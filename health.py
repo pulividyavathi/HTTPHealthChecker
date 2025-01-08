@@ -9,6 +9,7 @@ domain_stats = defaultdict(lambda: {"up": 0, "total": 0})
 stop_event = Event()
 
 def parse_config(file_path):
+    print(f"Reading configuration from {file_path}")
     with open(file_path, 'r') as file:
         return yaml.safe_load(file)
 
@@ -37,6 +38,8 @@ def log_availability():
         print(f"{domain} has {round(availability)}% availability percentage")
 
 def perform_health_checks(config):
+    print(f"Starting health check cycle at {time.ctime()}")
+
     global domain_stats
     for endpoint in config:
         name = endpoint['name']

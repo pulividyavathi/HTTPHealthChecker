@@ -11,4 +11,4 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Defines the command to run the application
-CMD ["python", "health.py", "/app/sample.yaml"]
+CMD ["python", "health.py", "sample.yml"]
